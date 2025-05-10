@@ -1,0 +1,48 @@
+#define M0 2
+#define M1 3
+#define M2 4
+#define M3 5
+
+
+#define back_side   digitalWrite(M0, 1); digitalWrite(M1, 0); digitalWrite(M2, 0); digitalWrite(M3, 1);
+#define front_side  digitalWrite(M0, 0); digitalWrite(M1, 1); digitalWrite(M2, 1); digitalWrite(M3, 0);
+#define left_side   digitalWrite(M0, 1); digitalWrite(M1, 0); digitalWrite(M2, 1); digitalWrite(M3, 0);
+#define right_side  digitalWrite(M0, 0); digitalWrite(M1, 1); digitalWrite(M2, 0); digitalWrite(M3, 1);
+#define Stop        digitalWrite(M0, 0); digitalWrite(M1, 0); digitalWrite(M2, 0); digitalWrite(M3, 0);
+
+char data;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(M0, OUTPUT);
+  pinMode(M1, OUTPUT);
+  pinMode(M2, OUTPUT);
+  pinMode(M3, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  while (Serial.available() == 0);
+  data = Serial.read();
+  Serial.println(data);
+  // delay(1000);
+  switch (data)
+  {
+    case '2':
+      front_side;
+      break;
+    case '1':
+      back_side;
+      break;
+    case '3':
+      left_side;
+      break;
+    case '4':
+      right_side;
+      break;
+    case '5':
+      Stop;
+      break;
+  }
+}
