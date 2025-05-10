@@ -1,0 +1,22 @@
+const int temp_pin=A0;
+float temp;
+const int led=8;
+const int buzzer=8;
+void setup() {
+  // put your setup code here, to run once:
+ pinMode(temp_pin,INPUT);
+ Serial.begin(9600);
+ pinMode(buzzer,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ temp=analogRead(temp_pin)*0.00488*100;
+ Serial.print("temp");
+ Serial.println(temp,4);
+ delay(2000);
+ if(temp>30){
+  digitalWrite(led,HIGH);
+  digitalWrite(buzzer,HIGH);
+ }
+}
